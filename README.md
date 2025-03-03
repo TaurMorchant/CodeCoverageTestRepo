@@ -1,5 +1,5 @@
 # TestRepo
 
-![Coverage](https://img.shields.io/badge/coverage-10%25-lightgrey)
+![Coverage](https://img.shields.io/badge/coverage-23%25-lightgrey)
 
 Some text
