@@ -40,11 +40,13 @@ jobs:
           echo "COVERAGE_PERCENT=$PERCENT" >> $GITHUB_ENV
           echo "COVERAGE = $COVERAGE"
           echo "TOTAL = $TOTAL"
+          echo "PERCENT = $PERCENT"
           echo "COVERAGE_PERCENT = $COVERAGE_PERCENT"
 
       - name: Create coverage badge
         run: |
           echo "![Coverage](https://img.shields.io/badge/coverage-${{ env.COVERAGE_PERCENT }}%25-brightgreen)" > coverage-badge.md
+          echo "PERCENT = $PERCENT"
 
       - name: Save badge artefact
         uses: actions/upload-artifact@v4
