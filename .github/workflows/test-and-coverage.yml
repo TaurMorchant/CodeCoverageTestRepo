@@ -36,10 +36,10 @@ jobs:
         run: |
           MISSED=$(xmllint --xpath 'string(/report/counter[@type="INSTRUCTION"]/@missed)' target/site/jacoco/jacoco.xml --noout)
           COVERED=$(xmllint --xpath 'string(/report/counter[@type="INSTRUCTION"]/@covered)' target/site/jacoco/jacoco.xml --noout)
-          PERCENT=$((COVERAGE * 100 / (MISSED + COVERED)))
+          PERCENT=$((COVERED * 100 / (MISSED + COVERED)))
           echo "COVERAGE_PERCENT=$PERCENT" >> $GITHUB_ENV
-          echo "COVERAGE = $COVERAGE"
-          echo "TOTAL = $TOTAL"
+          echo "MISSED = $MISSED"
+          echo "COVERED = $COVERED"
           echo "PERCENT = $PERCENT"
           echo "COVERAGE_PERCENT = $COVERAGE_PERCENT"
 
