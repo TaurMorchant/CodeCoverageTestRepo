@@ -38,6 +38,9 @@ jobs:
           TOTAL=$(xmllint --xpath '/report/counter[@type="LINE"]/@covered' target/site/jacoco/jacoco.xml --noout)
           PERCENT=$((COVERAGE * 100 / TOTAL))
           echo "COVERAGE_PERCENT=$PERCENT" >> $GITHUB_ENV
+          echo "COVERAGE = $COVERAGE"
+          echo "TOTAL = $TOTAL"
+          echo "COVERAGE_PERCENT = $COVERAGE_PERCENT"
 
       - name: Create coverage badge
         run: |
@@ -51,7 +54,7 @@ jobs:
 
       - name:  Update README
         run: |
-          sed -i "s/coverage-[0-9]\+%25/coverage-${{ env.COVERAGE_PERCENT }}%25/g" README.md
+          sed -i "s/img.shields.io/badge/coverage-[0-9]\+/img.shields.io/badge/coverage-${COVERAGE_PERCENT}/" README.md
 
       - name: Commit changes
         run: |
