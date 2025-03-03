@@ -32,7 +32,7 @@ jobs:
           echo "![Coverage](https://img.shields.io/badge/coverage-${{ env.COVERAGE_PERCENT }}%25-brightgreen)" > coverage-badge.md
 
       - name: Save badge artefact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-badge
           path: coverage-badge.md
