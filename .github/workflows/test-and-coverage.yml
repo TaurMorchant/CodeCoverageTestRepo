@@ -1,6 +1,9 @@
 name: Java CI with Coverage
 
-on: push
+on:
+  push:
+    paths-ignore:
+      - 'README.md'
 
 jobs:
   test-and-coverage:
@@ -42,3 +45,15 @@ jobs:
         with:
           name: coverage-badge
           path: coverage-badge.md
+
+      - name:  Update README
+        run: |
+          sed -i "s/coverage-[0-9]\+%25/coverage-${{ env.COVERAGE_PERCENT }}%25/g" README.md
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add README.md
+          git commit -m "Update coverage badge: ${{ env.COVERAGE_PERCENT }}%"
+          git push
