@@ -3,7 +3,10 @@ name: Update README
 permissions:
   contents: write
 
-on: push
+on:
+  push:
+    branches:
+      - sdfsdf
 
 jobs:
   update-readme:

@@ -1,11 +1,12 @@
 name: Java CI with Coverage
 
+permissions:
+  contents: write
+
 on:
   push:
     paths-ignore:
       - 'README.md'
-    branches:
-      - qwe
 
 jobs:
   test-and-coverage:
