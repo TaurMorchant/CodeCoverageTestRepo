@@ -1,0 +1,38 @@
+name: Java CI with Coverage
+
+on: push
+
+jobs:
+  test-and-coverage:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v2
+
+      - name: Install java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Build and test
+        run: mvn clean verify
+
+      - name: Get coverage percent
+        id: coverage
+        run: |
+          COVERAGE=$(grep -oP '(?<=<counter type="LINE" missed="\d+" covered=")\d+' target/site/jacoco/jacoco.xml)
+          TOTAL=$(grep -oP '(?<=covered=")\d+' target/site/jacoco/jacoco.xml | paste -sd+ - | bc)
+          PERCENT=$((COVERAGE * 100 / TOTAL))
+          echo "COVERAGE_PERCENT=$PERCENT" >> $GITHUB_ENV
+
+      - name: Create coverage badge
+        run: |
+          echo "![Coverage](https://img.shields.io/badge/coverage-${{ env.COVERAGE_PERCENT }}%25-brightgreen)" > coverage-badge.md
+
+      - name: Save badge artefact
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-badge
+          path: coverage-badge.md
