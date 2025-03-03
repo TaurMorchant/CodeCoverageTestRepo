@@ -54,7 +54,7 @@ jobs:
 
       - name:  Update README
         run: |
-          sed -i "s/img.shields.io/badge/coverage-[0-9]\+/img.shields.io/badge/coverage-${COVERAGE_PERCENT}/" README.md
+          sed -i "s/img\.shields\.io\/badge\/coverage-[0-9]\+/img\.shields\.io\/badge\/coverage-${COVERAGE_PERCENT}/" README.md
 
       - name: Commit changes
         run: |
