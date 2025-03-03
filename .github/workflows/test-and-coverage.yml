@@ -28,8 +28,8 @@ jobs:
       - name: Get coverage percent
         id: coverage
         run: |
-          COVERAGE=$(xmllint --xpath 'string(/report/counter[@type="LINE"]/@missed)' target/site/jacoco/jacoco.xml --noout)
-          TOTAL=$(xmllint --xpath 'string(/report/counter[@type="LINE"]/@covered' target/site/jacoco/jacoco.xml --noout)
+          COVERAGE=$(xmllint --xpath '/report/counter[@type="LINE"]/@missed' target/site/jacoco/jacoco.xml --noout)
+          TOTAL=$(xmllint --xpath '/report/counter[@type="LINE"]/@covered' target/site/jacoco/jacoco.xml --noout)
           PERCENT=$((COVERAGE * 100 / TOTAL))
           echo "COVERAGE_PERCENT=$PERCENT" >> $GITHUB_ENV
 
