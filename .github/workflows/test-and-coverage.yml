@@ -34,9 +34,9 @@ jobs:
       - name: Get coverage percent
         id: coverage
         run: |
-          COVERAGE=$(xmllint --xpath 'string(/report/counter[@type="LINE"]/@missed)' target/site/jacoco/jacoco.xml --noout)
-          TOTAL=$(xmllint --xpath 'string(/report/counter[@type="LINE"]/@covered)' target/site/jacoco/jacoco.xml --noout)
-          PERCENT=$((COVERAGE * 100 / TOTAL))
+          MISSED=$(xmllint --xpath 'string(/report/counter[@type="INSTRUCTION"]/@missed)' target/site/jacoco/jacoco.xml --noout)
+          COVERED=$(xmllint --xpath 'string(/report/counter[@type="INSTRUCTION"]/@covered)' target/site/jacoco/jacoco.xml --noout)
+          PERCENT=$((COVERAGE * 100 / (MISSED + COVERED)))
           echo "COVERAGE_PERCENT=$PERCENT" >> $GITHUB_ENV
           echo "COVERAGE = $COVERAGE"
           echo "TOTAL = $TOTAL"
@@ -47,6 +47,8 @@ jobs:
         run: |
           echo "![Coverage](https://img.shields.io/badge/coverage-${{ env.COVERAGE_PERCENT }}%25-brightgreen)" > coverage-badge.md
           echo "PERCENT = $PERCENT"
+          echo "COVERAGE_PERCENT = $COVERAGE_PERCENT"
+          echo "COVERAGE_PERCENT = ${COVERAGE_PERCENT}"
 
       - name: Save badge artefact
         uses: actions/upload-artifact@v4
