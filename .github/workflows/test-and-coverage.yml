@@ -22,6 +22,9 @@ jobs:
       - name: Build and test
         run: mvn clean verify
 
+      - name: TMP show jacoco.xml
+        run: cat target/site/jacoco/jacoco.xml
+
       - name: Get coverage percent
         id: coverage
         run: |
