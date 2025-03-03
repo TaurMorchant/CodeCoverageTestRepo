@@ -16,14 +16,17 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
+      - name: Install xmllint
+        run: sudo apt-get update && sudo apt-get install -y libxml2-utils
+
       - name: Build and test
         run: mvn clean verify
 
       - name: Get coverage percent
         id: coverage
         run: |
-          COVERAGE=$(grep -oP '(?<=<counter type="LINE" missed="\d+" covered=")\d+' target/site/jacoco/jacoco.xml)
-          TOTAL=$(grep -oP '(?<=covered=")\d+' target/site/jacoco/jacoco.xml | paste -sd+ - | bc)
+          COVERAGE=$(xmllint --xpath 'string(/report/counter[@type="LINE"]/@missed)' target/site/jacoco/jacoco.xml)
+          TOTAL=$(xmllint --xpath 'string(/report/counter[@type="LINE"]/@total ' target/site/jacoco/jacoco.xml)
           PERCENT=$((COVERAGE * 100 / TOTAL))
           echo "COVERAGE_PERCENT=$PERCENT" >> $GITHUB_ENV
 
