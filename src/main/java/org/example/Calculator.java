@@ -10,6 +10,9 @@ public final class Calculator {
     }
 
     public static int minus(int a, int b) {
+        if (a < b) {
+            throw new IllegalArgumentException("Oh on, negative numbers!");
+        }
         return a - b;
     }
 }
