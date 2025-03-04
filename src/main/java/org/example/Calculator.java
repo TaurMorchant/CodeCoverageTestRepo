@@ -1,6 +1,6 @@
 package org.example;
 
-public class Calculator {
+public final class Calculator {
     public static int plus(int a, int b) {
         return a + b;
     }
