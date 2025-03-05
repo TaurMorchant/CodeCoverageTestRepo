@@ -41,6 +41,10 @@ jobs:
         with:
           name: basic-sonar-report
           path: target/sonar/report-task.txt
+      - name: TMP get information
+        run: |
+          pwd
+          ls -la
       - name: Get report from sonarcloud.io
         run: |
           curl -X GET "https://sonarcloud.io/api/measures/component?component=TaurMorchant_CodeCoverageTestRepo&metricKeys=coverage,bugs,code_smells" -o .reports/sonar-report.json
