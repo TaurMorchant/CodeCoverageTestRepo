@@ -41,7 +41,7 @@ jobs:
           path: target/sonar/report-task.txt
       - name: Get report from sonarcloud.io
         run: |
-          curl -X GET "https://sonarcloud.io/api/measures/component?component=TaurMorchant_CodeCoverageTestRepo&metricKeys=coverage,bugs,code_smells" -o output.json
+          curl -X GET "https://sonarcloud.io/api/measures/component?component=TaurMorchant_CodeCoverageTestRepo&metricKeys=coverage,bugs,code_smells" -o sonar-report.json
       - name: Save advanced report as artefact
         uses: actions/upload-artifact@v4
         with:
