@@ -8,4 +8,8 @@ public final class Calculator {
     public static int multiply(int a, int b) {
         return a * b;
     }
+
+    public static void uselessAction() {
+        System.out.println("Hey, this action is really useless!");
+    }
 }
