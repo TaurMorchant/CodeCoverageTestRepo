@@ -33,14 +33,18 @@ jobs:
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=TaurMorchant_CodeCoverageTestRepo -Dsonar.organization=vladislav-larkin-test-organization -Dsonar.report.export.path=target/sonar-report.json
-      - name: Save report as artefact
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=TaurMorchant_CodeCoverageTestRepo -Dsonar.organization=vladislav-larkin-test-organization
+      - name: Save basic report as artefact
         uses: actions/upload-artifact@v4
         with:
-          name: sonar-report
+          name: basic-sonar-report
           path: target/sonar/report-task.txt
-      - name: Save report as artefact 2
+      - name: Get report from sonarcloud.io
+        run: |
+          curl -s https://sonarcloud.io/api/measures/component?component=TaurMorchant_CodeCoverageTestRepo&metricKeys=coverage,bugs,code_smells \
+            -o sonar-report.json
+      - name: Save advanced report as artefact
         uses: actions/upload-artifact@v4
         with:
-          name: sonar-report-2
-          path: target/sonar-report.json
+          name: full-sonar-report
+          path: sonar-report.json
