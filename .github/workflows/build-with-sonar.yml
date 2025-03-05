@@ -55,12 +55,10 @@ jobs:
           path: .reports/sonar-report.json
       - name: Add and commit report
         run: |
-          git config --global user.name "github-actions"
+          git config --global user.name "GitHub Actions"
           git config --global user.email "github-actions@github.com"
           git add .reports/sonar-report.json
           git commit -m "AUTO sonar report was added"
-      - name: Push changes
+          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git push
