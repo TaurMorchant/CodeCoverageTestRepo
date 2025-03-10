@@ -9,7 +9,7 @@ jobs:
     with:
       maven-command: "--batch-mode install -Dgpg.skip=true"
       server-id: github
-      java-version: 17
+      java-version: 21
     secrets:
       maven-token: ${{ secrets.GITHUB_TOKEN }}
 #  build:
