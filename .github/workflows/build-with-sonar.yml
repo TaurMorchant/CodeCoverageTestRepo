@@ -7,7 +7,7 @@ jobs:
   mvn:
     uses: TaurMorchant/qubership-workflow-hub-tmp/.github/workflows/maven-publish.yml@main
     with:
-      maven-command: "--batch-mode install -Dgpg.skip=true"
+      maven-command: "--batch-mode install -Dgpg.skip=true org.sonarsource.scanner.maven:sonar-maven-plugin:5.0.0.4389:sonar -Dsonar.projectKey=TaurMorchant_CodeCoverageTestRepo -Dsonar.organization=vladislav-larkin-test-organization"
       server-id: github
       java-version: 21
     secrets:
