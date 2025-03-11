@@ -26,6 +26,8 @@ jobs:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
+      - name: Check SONAR_ORGANIZATION_NAME
+        run: echo "SONAR_ORGANIZATION_NAME is $SONAR_ORGANIZATION_NAME and ${{ env.$SONAR_ORGANIZATION_NAME }}"
       - name: Cache Maven packages
         uses: actions/cache@v4
         with:
