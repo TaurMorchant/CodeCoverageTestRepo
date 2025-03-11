@@ -36,29 +36,29 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:5.0.0.4389:sonar
-      - name: Save basic report as artefact
-        uses: actions/upload-artifact@v4
-        with:
-          name: basic-sonar-report
-          path: target/sonar/report-task.txt
-      - name: TMP get information
-        run: |
-          pwd
-          ls -la
-      - name: Get report from sonarcloud.io
-        run: |
-          curl -X GET "https://sonarcloud.io/api/measures/component?component=TaurMorchant_CodeCoverageTestRepo&metricKeys=coverage,bugs,code_smells" -o .reports/sonar-report.json
-      - name: Save advanced report as artefact
-        uses: actions/upload-artifact@v4
-        with:
-          name: full-sonar-report
-          path: .reports/sonar-report.json
-      - name: Add and commit report
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "github-actions@github.com"
-          git add .reports/sonar-report.json
-          git commit -m "AUTO sonar report was added"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      - name: Save basic report as artefact
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: basic-sonar-report
+#          path: target/sonar/report-task.txt
+#      - name: TMP get information
+#        run: |
+#          pwd
+#          ls -la
+#      - name: Get report from sonarcloud.io
+#        run: |
+#          curl -X GET "https://sonarcloud.io/api/measures/component?component=org.example:CodeCoverageTest&metricKeys=coverage,bugs,code_smells" -o .reports/sonar-report.json
+#      - name: Save advanced report as artefact
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: full-sonar-report
+#          path: .reports/sonar-report.json
+#      - name: Add and commit report
+#        run: |
+#          git config --global user.name "GitHub Actions"
+#          git config --global user.email "github-actions@github.com"
+#          git add .reports/sonar-report.json
+#          git commit -m "AUTO sonar report was added"
+#          git push
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
