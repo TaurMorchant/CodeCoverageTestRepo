@@ -27,7 +27,7 @@ jobs:
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
       - name: Check SONAR_ORGANIZATION_NAME
-        run: echo "SONAR_ORGANIZATION_NAME is ${{ env.SONAR_ORGANIZATION_NAME }}"
+        run: echo "SONAR_ORGANIZATION_NAME is ${{ vars.SONAR_ORGANIZATION_NAME }}"
       - name: Cache Maven packages
         uses: actions/cache@v4
         with:
@@ -37,7 +37,7 @@ jobs:
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:5.0.0.4389:sonar -Dsonar.organization=${{ env.SONAR_ORGANIZATION_NAME }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:5.0.0.4389:sonar -Dsonar.organization=${{ vars.SONAR_ORGANIZATION_NAME }}
 #      - name: Save basic report as artefact
 #        uses: actions/upload-artifact@v4
 #        with:
