@@ -35,7 +35,7 @@ jobs:
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:5.0.0.4389:sonar -Dsonar.projectKey=TaurMorchant_CodeCoverageTestRepo -Dsonar.organization=vladislav-larkin-test-organization
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:5.0.0.4389:sonar
       - name: Save basic report as artefact
         uses: actions/upload-artifact@v4
         with:
